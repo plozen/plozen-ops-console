@@ -82,6 +82,7 @@ function parseOptions(args) {
     source: packageRoot,
     force: false,
     replace: false,
+    allowPublicDesignKit: false,
     webSource: "",
     appSource: "",
   };
@@ -94,6 +95,10 @@ function parseOptions(args) {
     }
     if (arg === "--replace") {
       options.replace = true;
+      continue;
+    }
+    if (arg === "--allow-public-design-kit") {
+      options.allowPublicDesignKit = true;
       continue;
     }
     if (arg.startsWith("--")) {
@@ -397,7 +402,11 @@ async function runChecks(options, { strict }) {
     checks.push(await checkMissing("origin sample screenshots removed", path.join(target, "screenshots/origin")));
   }
 
-  checks.push(await checkMissing("public/design-kit absent", path.resolve(process.cwd(), "public/design-kit")));
+  if (options.allowPublicDesignKit) {
+    checks.push(await checkExists("public/design-kit synced", path.resolve(process.cwd(), "public/design-kit")));
+  } else {
+    checks.push(await checkMissing("public/design-kit absent", path.resolve(process.cwd(), "public/design-kit")));
+  }
   checks.push(await checkMissing(
     ".vercel/output/static/design-kit absent",
     path.resolve(process.cwd(), ".vercel/output/static/design-kit"),
@@ -507,6 +516,8 @@ Options:
   --mode <mode>         empty-raw, sample-scaffold, or copy-existing. Default: empty-raw
   --web-source <path>   Existing web raw source for copy-existing
   --app-source <path>   Existing app raw source for copy-existing
+  --allow-public-design-kit
+                        Allow product runtime sync output at public/design-kit
   --replace             Recreate target if it already exists
   --force               Alias for --replace
 `);

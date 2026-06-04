@@ -1,0 +1,76 @@
+{
+  "snapshotDate": "2026-06-01",
+  "overview": {
+    "resourceStatus": { "label": "주의", "status": "warn" },
+    "serviceStatus": { "label": "주의", "status": "warn" },
+    "automationStatus": { "label": "정상", "status": "ok" },
+    "logStatus": { "label": "심각", "status": "error" }
+  },
+  "resources": [
+    { "label": "CPU Load", "value": "Load 1.46", "note": "현재 사용률 18%", "percent": 18, "status": "ok" },
+    { "label": "Memory", "value": "51.2GB / 64GB", "note": "전체 메모리의 80%", "percent": 80, "status": "warn" },
+    { "label": "SSD Root", "value": "297GB / 512GB", "note": "루트 디스크 58%", "percent": 58, "status": "ok" },
+    { "label": "HDD Data", "value": "1.6TB / 4TB", "note": "데이터 볼륨 41%", "percent": 41, "status": "ok" }
+  ],
+  "serviceSummary": {
+    "ok": 8,
+    "warn": 1,
+    "error": 0,
+    "unknown": 1
+  },
+  "automation": {
+    "successRate": "98.4%",
+    "successCount": 62,
+    "retryCount": 2,
+    "failureCount": 0
+  },
+  "logSummary": {
+    "ok": 126,
+    "warn": 3,
+    "error": 2,
+    "actionRequired": "심각 2 · 주의 3"
+  },
+  "knowledgeSummary": {
+    "total": 8,
+    "loaded": 1,
+    "vector": 6,
+    "failed": 1
+  },
+  "services": [
+    { "name": "Ops Console", "description": "운영 관리자 웹", "status": "ok", "runtime": "Host/systemd", "category": "웹 UI", "port": "3100", "process": "plozen-ops-console.service" },
+    { "name": "n8n", "description": "워크플로우 자동화", "status": "ok", "runtime": "Docker", "category": "자동화", "port": "5600", "process": "plozen-automation-n8n" },
+    { "name": "Knowledge API", "description": "RAG 문서 조회·검색 API", "status": "ok", "runtime": "Docker", "category": "API", "port": "3200", "process": "plozen-knowledge-api" },
+    { "name": "Knowledge Postgres", "description": "Vector DB 저장소", "status": "ok", "runtime": "Docker", "category": "DB", "port": "55000", "process": "plozen-knowledge-postgres" },
+    { "name": "TimescaleDB", "description": "시계열 데이터 저장소", "status": "ok", "runtime": "Docker", "category": "DB", "port": "5432", "process": "plozen-timescaledb" },
+    { "name": "Task Runner", "description": "dispatcher 자동화 브리지", "status": "warn", "runtime": "Host/systemd", "category": "자동화", "port": "3400", "process": "plozen-dispatcher.service" },
+    { "name": "OpenClaw Gateway", "description": "Agent Discord gateway", "status": "ok", "runtime": "Host/systemd", "category": "Agent", "port": "18010", "process": "openclaw gateway" },
+    { "name": "Hermes Gateway", "description": "Agent background gateway", "status": "unknown", "runtime": "Host/systemd", "category": "Agent", "port": "-", "process": "hermes gateway" },
+    { "name": "x11vnc", "description": "데스크톱 원격 접속", "status": "ok", "runtime": "Host/systemd", "category": "원격 접속", "port": "5900", "process": "x11vnc" },
+    { "name": "noVNC", "description": "브라우저 원격 접속", "status": "ok", "runtime": "Host/systemd", "category": "원격 접속", "port": "5910", "process": "websockify" }
+  ],
+  "portPolicy": [
+    { "range": "3100", "description": "Ops Console 웹 UI" },
+    { "range": "3200", "description": "PLOZEN Knowledge API" },
+    { "range": "3400", "description": "dispatcher 레거시 자동화 브리지" },
+    { "range": "5600", "description": "n8n 워크플로우" },
+    { "range": "5900 / 5910", "description": "VNC / noVNC 원격 접속" },
+    { "range": "18000대", "description": "Agent gateway, OpenClaw 18010" },
+    { "range": "55000대", "description": "DB 외부 바인딩, Postgres 55000" }
+  ],
+  "documents": [
+    { "name": "client-delivery-spec.md", "type": "Markdown", "source": "직접 업로드", "chunks": "-", "characters": "-", "status": "loaded", "processedAt": "방금 전" },
+    { "name": "RAG API MVP Smoke V3", "type": "TXT", "source": "직접 입력", "chunks": "1개", "characters": "26", "status": "vector", "processedAt": "5월 29일 17:05" },
+    { "name": "RAG API MVP Smoke V2", "type": "TXT", "source": "직접 입력", "chunks": "1개", "characters": "29", "status": "vector", "processedAt": "5월 29일 17:02" },
+    { "name": "PLOZEN Knowledge MOC", "type": "Markdown", "source": "Obsidian", "chunks": "4개", "characters": "178", "status": "vector", "processedAt": "5월 29일 13:19" },
+    { "name": "PLOZEN Knowledge Architecture", "type": "Markdown", "source": "Repository", "chunks": "3개", "characters": "109", "status": "vector", "processedAt": "5월 29일 13:19" },
+    { "name": "2026-05-29 포트폴리오 PDF 배포 세션", "type": "Markdown", "source": "Obsidian", "chunks": "2개", "characters": "89", "status": "vector", "processedAt": "5월 29일 13:19" },
+    { "name": "구직 플랫폼 가입 및 세팅", "type": "Markdown", "source": "Todo", "chunks": "1개", "characters": "44", "status": "vector", "processedAt": "5월 29일 13:19" },
+    { "name": "broken-note.md", "type": "Markdown", "source": "직접 업로드", "chunks": "-", "characters": "-", "status": "failed", "processedAt": "5분 전" }
+  ],
+  "uploadFiles": [
+    { "name": "client-delivery-spec.md", "type": "Markdown", "size": "18 KB" },
+    { "name": "rag-api-smoke-v3.txt", "type": "TXT", "size": "6 KB" },
+    { "name": "knowledge-architecture.md", "type": "Markdown", "size": "24 KB" },
+    { "name": "portfolio-session-summary.md", "type": "Markdown", "size": "11 KB" }
+  ]
+}

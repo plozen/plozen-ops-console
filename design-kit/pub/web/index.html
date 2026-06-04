@@ -14,12 +14,12 @@
         <div>
           <p class="kicker">Raw Admin Pages</p>
           <h1 id="web-board-title">PLOZEN Ops Console 관리자 콘솔</h1>
-          <p>전청마 관리자웹의 운영형 UI 밀도를 기준으로 잡은 시스템 관리자 화면 시안입니다.</p>
+          <p>PLOZEN 운영자가 Service 상태와 VectorDB 데이터를 빠르게 스캔하는 관리자 화면 시안입니다.</p>
         </div>
         <nav class="page-jump" aria-label="관리자 화면 이동">
-          <a href="#dashboard">메인 대시보드</a>
-          <a href="#system">Docker 상세</a>
-          <a href="#knowledge">Knowledge 관리</a>
+          <a href="#dashboard">Dashboard</a>
+          <a href="#service">Service</a>
+          <a href="#knowledge">VectorDB</a>
         </nav>
       </section>
 
@@ -28,8 +28,8 @@
           <header class="web-page-entry-head">
             <div>
               <span>01</span>
-              <h2>Main Dashboard</h2>
-              <p>13번 서버 자원, Docker, 자동화 상태를 요약하는 운영 첫 화면</p>
+              <h2>Dashboard</h2>
+              <p>13번 서버 자원, 서비스, 자동화 상태를 요약하는 운영 첫 화면</p>
             </div>
             <strong>Admin</strong>
           </header>
@@ -37,7 +37,7 @@
           <div class="web-page-iframe-wrap">
             <iframe
               src="./pages/dashboard.html?viewport=desktop&amp;embed=1"
-              title="PLOZEN Ops Console 메인 대시보드 raw page"
+              title="PLOZEN Ops Console Dashboard raw page"
               loading="eager"
             ></iframe>
           </div>
@@ -49,28 +49,28 @@
           </footer>
         </article>
 
-        <article id="system" class="web-page-entry">
+        <article id="service" class="web-page-entry">
           <header class="web-page-entry-head">
             <div>
               <span>02</span>
-              <h2>Docker Detail</h2>
-              <p>13번 서버 Docker 컨테이너 상태와 자원 사용량을 보는 상세 화면</p>
+              <h2>Service</h2>
+              <p>Docker 컨테이너와 Host/systemd 서비스를 함께 보는 운영 상태 화면</p>
             </div>
-            <strong>System</strong>
+            <strong>Service</strong>
           </header>
 
           <div class="web-page-iframe-wrap">
             <iframe
-              src="./pages/system.html?viewport=desktop&amp;embed=1"
-              title="13번 서버 Docker 상세 raw page"
+              src="./pages/service.html?viewport=desktop&amp;embed=1"
+              title="13번 서버 Service 상태 raw page"
               loading="lazy"
             ></iframe>
           </div>
 
           <footer class="web-page-entry-foot">
-            <a href="./pages/system.html?viewport=desktop">Desktop</a>
-            <a href="./pages/system.html?viewport=tablet">Tablet</a>
-            <a href="./pages/system.html?viewport=mobile">Mobile</a>
+            <a href="./pages/service.html?viewport=desktop">Desktop</a>
+            <a href="./pages/service.html?viewport=tablet">Tablet</a>
+            <a href="./pages/service.html?viewport=mobile">Mobile</a>
           </footer>
         </article>
 
@@ -78,16 +78,16 @@
           <header class="web-page-entry-head">
             <div>
               <span>03</span>
-              <h2>Knowledge Management</h2>
-              <p>Vector DB 데이터, 문서 업로드, 임베딩·청킹 API 호출을 관리하는 Knowledge 화면</p>
+              <h2>VectorDB</h2>
+              <p>Vector DB 문서 상태와 업로드 흐름을 한 화면에서 관리하는 VectorDB 화면</p>
             </div>
-            <strong>Knowledge</strong>
+            <strong>VectorDB</strong>
           </header>
 
           <div class="web-page-iframe-wrap">
             <iframe
               src="./pages/knowledge.html?viewport=desktop&amp;embed=1"
-              title="PLOZEN Knowledge 관리 raw page"
+              title="PLOZEN VectorDB 관리 raw page"
               loading="lazy"
             ></iframe>
           </div>

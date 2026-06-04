@@ -1,0 +1,9 @@
+.git
+.next
+node_modules
+npm-debug.log*
+public/design-kit
+.env
+.env.*
+.vercel
+.worktrees

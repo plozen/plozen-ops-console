@@ -52,7 +52,7 @@
 - `portfolio/kmong/`: 크몽 및 유사 판매 채널용 외부 제출 이미지 허브.
 - `portfolio/kmong/mobile/`: 모바일 앱 포트폴리오 대표/상세/페이지 원본.
 - `portfolio/kmong/web/`: 반응형 웹사이트 포트폴리오 대표/서브 상세/페이지 원본.
-- `pub/web/pages/`: 웹/관리자 raw page 원본. 대시보드, 회원 관리, QR관리, 푸시 발송처럼 실제 iframe에 들어가는 순수 페이지 UI만 둔다.
+- `pub/web/pages/`: 웹/관리자 raw page 원본. Dashboard, Service, KnowledgeDB처럼 실제 iframe에 들어가는 순수 페이지 UI만 둔다.
 - `screenshots/origin/`: 원본 앱/웹 구현 화면 또는 참고 화면 캡처.
 - `screenshots/pub/`: raw artboard export 캡처.
 - `screenshots/styleguide/`: styleguide QA 캡처.
@@ -177,7 +177,71 @@
 - scan-friendly metric을 가진 dashboard section
 - desktop/tablet/mobile 반응형 layout
 
-## PLOZEN Knowledge 화면 용어
+## PLOZEN Ops Console Admin Shell
+
+`pub/web/pages/dashboard.html`, `service.html`, `knowledge.html`은 PLOZEN Ops Console의 현재 live 기준 raw page다. 이 repo에서는 별도 `design-lab/`를 만들지 않고 `design-kit/pub/web/pages/`를 publishing 원본으로 관리한다.
+
+### Runtime Publishing
+
+- `design-kit/pub/web/`은 design-kit publishing 원본이다.
+- 11번 개발환경과 13번 Docker 배포환경은 시작 전에 `npm run sync:design-kit`으로 `design-kit/pub/web/`을 `public/design-kit/`에 동기화한다.
+- 런타임 URL은 `/design-kit/`을 기준으로 한다. 예: `/design-kit/pages/dashboard.html`.
+- `public/design-kit/`은 generated runtime output이므로 git에 커밋하지 않는다. Next 서버 도입 후에도 같은 `public/design-kit/` 경로로 정적 리소스를 서빙한다.
+
+### Shell Layout
+
+- Desktop 기본 폭은 1440px이며 `.dashboard-screen`은 `276px sidebar + fluid main` 2열 grid를 쓴다.
+- Sidebar는 짙은 green-black surface를 쓰고, brand lockup과 운영 메뉴를 같은 위치에 고정한다.
+- Main padding은 desktop `24px 28px`, mobile `20px 16px 28px`를 기준으로 한다.
+- Header는 좌측 eyebrow/title/description, 우측 sync stamp + primary action 구조를 공통으로 쓴다.
+- Header action과 form control은 최소 44px touch target을 유지한다.
+- 모바일과 900px 이하 viewport에서는 sidebar가 상단 band로 접히고 nav는 2열 grid로 전환한다.
+
+### Visual Rhythm
+
+- `dashboard`, `service`, `knowledge` 모두 `Header -> Metric strip -> Primary section -> Secondary section` 흐름을 유지한다.
+- Metric strip 다음 첫 section 간격은 18px로 고정한다. 같은 페이지의 후속 section도 18px 간격을 쓴다.
+- Section surface는 카드형 marketing UI가 아니라 얇은 border와 neutral fill을 쓰는 functional surface다.
+- 반복 데이터를 큰 카드로 만들지 않는다. Service와 문서는 table/row density를 우선한다.
+- Dashboard의 자원/분포 시각화는 운영 첫 화면의 예외적 readout이며, 상단 metric strip과 section border rhythm은 Service/KnowledgeDB와 맞춘다.
+
+## PLOZEN 공통 상태지표
+
+- Dashboard, Service, KnowledgeDB의 상단 상태지표는 `metric-strip metric-strip--status` 구조를 공통으로 쓴다.
+- 상태지표 카드 높이는 88px 기준으로 유지한다. 보조 설명용 `small` 문구를 넣어 카드별 높이나 밀도가 달라지게 만들지 않는다.
+- 상단 상태지표 카드에는 상태 점을 넣지 않는다. 색상은 카드 상단 라인과 숫자/상태값 컬러로만 구분한다.
+- 작은 상태 점은 서비스 테이블 row의 `.service-status` pill에서만 쓴다.
+- 상태 점 크기는 6px 원형이고, `aria-hidden="true"`로 스크린리더 읽기 흐름에서 제외한다.
+- Dashboard 차트 범례와 KnowledgeDB 문서 상태 pill에는 상태 점을 쓰지 않는다. 차트는 pie graphic과 텍스트 legend, 문서 상태는 pill label만 사용한다.
+- KnowledgeDB 지표도 일반 숫자 카드가 아니라 `전체 문서 | 적재 | 벡터 | 실패`를 같은 상태지표 컴포넌트로 표시한다.
+
+## PLOZEN Table / Filter 표준
+
+- 조회조건은 section header 바로 아래에 위치하고, 검색 input + select group + 검색 button을 한 줄 grid로 둔다.
+- Desktop filter grid는 `minmax(220px, 1fr) + 3 select + 96px action` 구조를 기본으로 한다.
+- KnowledgeDB dense filter는 44px 높이를 최소값으로 허용한다. Service filter도 같은 높이와 border rhythm을 쓴다.
+- Table은 `border-collapse: collapse`, 40~42px row height, 12~13px label text, 얇은 divider를 기준으로 한다.
+- Desktop table은 가로 스캔을 우선하고, mobile에서는 필요한 컬럼만 남기거나 row label/value 구조로 전환한다.
+- Empty/loading/error 상태를 추가할 때도 같은 section surface 안에서 table 영역을 대체한다. 별도의 큰 안내 카드로 section rhythm을 깨지 않는다.
+
+## PLOZEN Service 화면 용어
+
+- Service 상태 화면 파일명은 `pub/web/pages/service.html`로 둔다. Docker만 다루는 기존 시스템 상세 명칭은 쓰지 않는다.
+- 좌측 메뉴 라벨은 `Service`로 통일한다. Docker 컨테이너와 OS/systemd 서비스를 한 목록에서 함께 보여준다.
+- 서비스 목록의 row 상태 라벨은 `정상`, `주의`, `에러`, `미확인` 4개로 둔다. 상태 옆에는 작은 원형 점을 붙이고, 정상은 초록, 주의는 노랑, 에러는 빨강, 미확인은 파랑을 쓴다.
+- 서비스 목록 컬럼은 `서비스 | 상태 | 실행 방식 | 분류 | 포트 | 프로세스` 순서를 기본값으로 둔다.
+- `실행 방식`은 `Docker`와 `Host/systemd`를 기본 분류로 둔다. Docker 메뉴를 별도 top-level 메뉴로 분리하지 않는다.
+- 실행 방식 요약처럼 서비스 목록과 중복되는 요약 섹션은 두지 않는다.
+- 포트 정책은 별도 대형 페이지가 아니라 서비스 목록 아래 compact section으로 둔다.
+- 포트 정책은 `3100`, `3400`, `5600`, `5900/5910`, `18000대`, `55000대`처럼 운영자가 바로 판단할 수 있는 범위와 대표 서비스를 함께 표시한다.
+- dispatcher/Task Runner는 현재 동작 중인 레거시 자동화 브리지로 `주의` 상태를 사용하고, OpenClaw/Hermes 전환 예정 맥락을 함께 표시한다.
+- Hermes처럼 systemd는 살아있지만 public port가 없는 서비스는 에러가 아니라 `미확인`으로 분류한다.
+- 모바일 서비스 목록은 desktop table을 그대로 줄이지 않고 row별 label/value 구조로 바꾼다. 포트와 프로세스는 줄바꿈을 허용해 overflow를 만들지 않는다.
+- 서비스 컬럼은 가장 넓게 잡고, 상태/실행 방식/분류/포트는 좁게 유지한다. 프로세스는 긴 systemd/container 명칭을 위해 desktop에서 넓게 둔다.
+- 상태 pill은 `정상`, `주의`, `에러`, `미확인` 텍스트와 6px 점을 함께 보여주는 유일한 상태 점 사용처다.
+- 포트 정책은 서비스 목록과 같은 surface density로 유지하며, desktop 2열 grid, mobile 1열 list로 접는다.
+
+## PLOZEN KnowledgeDB 화면 용어
 
 - 기본 화면은 개발자 용어보다 운영자가 바로 이해하는 한국어 라벨을 우선한다.
 - `Collection`은 현재 데이터 구조에 없으므로 쓰지 않는다. 문서 단위 표는 `문서명`을 첫 컬럼으로 둔다.
@@ -191,15 +255,29 @@
 - `적재`는 문서가 등록됐지만 검색 가능한 벡터가 아직 없는 상태다.
 - `벡터`는 문서 조각과 벡터가 생성되어 검색 가능한 상태다.
 - `실패`는 업로드, 문서 등록, 조각 생성, 벡터 생성 중 실패가 발생한 상태다.
-- Knowledge 화면 기본 섹션은 `Vector DB`와 `문서 업로드` 2개로 둔다. 별도 `벡터 생성 흐름` 섹션은 만들지 않는다.
+- KnowledgeDB 화면 기본 섹션은 `Vector DB`와 `문서 업로드` 2개로 둔다. 별도 `벡터 생성 흐름` 섹션은 만들지 않는다.
 - `Vector DB` 섹션 내부 순서는 `제목/일괄 액션 -> 조회조건 -> 문서 테이블`로 둔다.
 - 조회조건은 검색어, 상태, 파일 형식, 저장 위치, 검색 실행 버튼을 한 묶음으로 둔다.
 - 문서 목록 컬럼은 `선택 | 문서명 | 파일 형식 | 저장 위치 | 조각 수 | 글자량 | 상태 | 최근 처리 | 작업` 순서를 기본값으로 둔다.
 - row 작업은 `벡터 생성` 하나만 기본값으로 둔다. `적재`와 `실패` 문서에서는 선택 체크박스와 버튼을 활성화하고, 이미 `벡터` 상태인 문서에서는 둘 다 비활성화한다.
 - 문서 목록은 하단에 작은 pagination을 둔다. 선택 체크박스는 시각 크기와 별개로 최소 44px 터치 영역을 확보한다.
-- Knowledge 조회조건은 운영 테이블 밀도를 위해 44px 높이를 최소값으로 쓰는 dense filter 예외를 허용한다.
+- KnowledgeDB 조회조건은 운영 테이블 밀도를 위해 44px 높이를 최소값으로 쓰는 dense filter 예외를 허용한다.
 - `문서 업로드`는 섹션 헤더를 유지하고, 선택 파일 목록과 `전체 업로드` 액션을 바로 노출한다. 별도 안내 카드와 선택 파일 요약 정보 블록은 두지 않는다.
 - 모바일 문서 업로드 목록은 파일명을 첫 줄에 두고, 파일 형식과 크기는 다음 줄에서 분리해 읽히게 한다.
+- KnowledgeDB table은 desktop에서 9컬럼을 유지하고, mobile에서는 `선택 | 문서명 | 상태 | 작업`만 남겨 horizontal overflow를 막는다.
+- 문서명은 줄바꿈을 허용하고, 체크박스 hitbox는 44px로 둔다.
+- `벡터 생성` 버튼은 `적재`와 `실패` 문서에서만 활성화한다. `벡터` 상태 문서는 체크박스와 버튼을 disabled로 둔다.
+- 문서 업로드는 table/list형 surface로 유지한다. 업로드 안내용 hero, 큰 dropzone card, 별도 summary card를 추가하지 않는다.
+
+## PLOZEN Responsive 기준
+
+- 검수 폭은 desktop 1440px, tablet 768px, mobile 390px, blocker 344px이다.
+- 900px 이하에서는 sidebar가 상단으로 이동하고 main content는 1열로 접힌다.
+- Metric strip은 desktop 4열, mobile/tablet 2열이다. 각 metric card 높이는 여전히 88px 기준을 유지한다.
+- Service table은 900px 이하에서 `thead`를 숨기고 각 row를 label/value grid로 전환한다.
+- KnowledgeDB table은 900px 이하에서 파일 형식, 저장 위치, 조각 수, 글자량, 최근 처리 컬럼을 숨긴다.
+- Filter bar와 upload action은 900px 이하에서 1열로 접는다.
+- 344px blocker에서 header action, metric card, table action, upload row text가 좌우 overflow를 만들면 fail이다.
 
 ## 상태 목록
 

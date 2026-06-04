@@ -3,8 +3,8 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>PLOZEN Ops Console 메인 대시보드</title>
-    <meta name="description" content="PLOZEN Ops Console 시스템 관리자 메인 대시보드 raw page" />
+    <title>PLOZEN Ops Console Dashboard</title>
+    <meta name="description" content="PLOZEN Ops Console 시스템 관리자 Dashboard raw page" />
     <link rel="icon" href="data:," />
     <script>
       const params = new URLSearchParams(window.location.search);
@@ -27,11 +27,11 @@
         </a>
 
         <nav class="sidebar-nav" aria-label="운영 메뉴">
-          <a class="nav-link is-active" href="./dashboard.html?viewport=desktop">대시보드</a>
-          <a class="nav-link" href="./system.html?viewport=desktop">Docker</a>
+          <a class="nav-link is-active" href="./dashboard.html?viewport=desktop">Dashboard</a>
+          <a class="nav-link" href="./service.html?viewport=desktop">Service</a>
           <a class="nav-link" href="#">Automation</a>
           <a class="nav-link" href="#">Logs</a>
-          <a class="nav-link" href="./knowledge.html?viewport=desktop">Knowledge</a>
+          <a class="nav-link" href="./knowledge.html?viewport=desktop">VectorDB</a>
         </nav>
       </aside>
 
@@ -39,39 +39,39 @@
         <header class="dashboard-header">
           <div>
             <p class="eyebrow">Admin Overview</p>
-            <h1 id="dashboard-title">PLOZEN 운영 대시보드</h1>
-            <p>13번 서버의 컴퓨팅 자원, Docker, 자동화 상태를 시스템 관리자 관점에서 확인합니다.</p>
+            <h1 id="dashboard-title">PLOZEN 운영 Dashboard</h1>
+            <p>13번 서버의 컴퓨팅 자원, 서비스, 자동화 상태를 시스템 관리자 관점에서 확인합니다.</p>
           </div>
-          <div class="header-actions" aria-label="대시보드 액션">
-            <span>동기화 2분 전</span>
-            <button type="button">새로고침</button>
+          <div class="header-actions" aria-label="Dashboard 액션">
+            <button class="header-refresh-button" type="button" aria-label="새로고침, 동기화 2분 전" title="새로고침, 동기화 2분 전">
+              <svg aria-hidden="true" viewBox="0 0 24 24">
+                <path d="M20 12a8 8 0 1 1-2.34-5.66"></path>
+                <path d="M20 4v6h-6"></path>
+              </svg>
+            </button>
           </div>
         </header>
 
         <dl class="metric-strip metric-strip--status" aria-label="운영 상태 지표">
           <div class="metric-card metric-card--warn">
             <dt>Resource</dt>
-            <dd><span class="status-dot"></span>주의</dd>
-            <small>Memory 80%</small>
+            <dd>주의</dd>
           </div>
           <div class="metric-card metric-card--ok">
-            <dt>Docker</dt>
-            <dd><span class="status-dot"></span>정상</dd>
-            <small>Running 12/12</small>
+            <dt>Service</dt>
+            <dd>정상</dd>
           </div>
           <div class="metric-card metric-card--ok">
             <dt>Automation</dt>
-            <dd><span class="status-dot"></span>정상</dd>
-            <small>성공률 98.4%</small>
+            <dd>정상</dd>
           </div>
           <div class="metric-card metric-card--critical">
             <dt>Log</dt>
-            <dd><span class="status-dot"></span>심각</dd>
-            <small>오류 2건</small>
+            <dd>심각</dd>
           </div>
         </dl>
 
-        <section class="operations-board operations-board--dashboard" aria-label="운영 대시보드 상세">
+        <section class="operations-board operations-board--dashboard" aria-label="Dashboard 상세">
           <article class="board-cell board-cell--wide">
             <header>
               <div>
@@ -108,23 +108,24 @@
           </article>
         </section>
 
-        <section class="status-chart-grid" aria-label="Docker, 자동화, 로그 상태 분포">
+        <section class="status-chart-grid" aria-label="서비스, 자동화, 로그 상태 분포">
           <article class="chart-panel">
             <header>
               <div>
-                <p class="eyebrow">Docker</p>
-                <h2>컨테이너 상태 분포</h2>
+                <p class="eyebrow">Service</p>
+                <h2>서비스 상태 분포</h2>
               </div>
             </header>
             <div class="pie-summary">
-              <div class="pie-chart pie-chart--docker" role="img" aria-label="Docker 컨테이너 12개 모두 실행 중">
-                <strong>100%</strong>
-                <span>Running</span>
+              <div class="pie-chart pie-chart--service" role="img" aria-label="서비스 9개 중 정상 7개, 주의 1개, 에러 0개, 미확인 1개">
+                <strong>7/9</strong>
+                <span>정상</span>
               </div>
               <dl class="chart-legend">
-                <div><dt><i class="legend-dot legend-dot--green"></i>Running</dt><dd>12개</dd></div>
-                <div><dt><i class="legend-dot legend-dot--amber"></i>Stopped</dt><dd>0개</dd></div>
-                <div><dt><i class="legend-dot legend-dot--red"></i>Unhealthy</dt><dd>0개</dd></div>
+                <div><dt>정상</dt><dd>7개</dd></div>
+                <div><dt>주의</dt><dd>1개</dd></div>
+                <div><dt>에러</dt><dd>0개</dd></div>
+                <div><dt>미확인</dt><dd>1개</dd></div>
                 <div><dt>최근 갱신</dt><dd>30초 전</dd></div>
               </dl>
             </div>
@@ -143,9 +144,9 @@
                 <span>성공률</span>
               </div>
               <dl class="chart-legend">
-                <div><dt><i class="legend-dot legend-dot--green"></i>성공</dt><dd>62회</dd></div>
-                <div><dt><i class="legend-dot legend-dot--amber"></i>재시도</dt><dd>2건</dd></div>
-                <div><dt><i class="legend-dot legend-dot--red"></i>실패</dt><dd>0건</dd></div>
+                <div><dt>성공</dt><dd>62회</dd></div>
+                <div><dt>재시도</dt><dd>2건</dd></div>
+                <div><dt>실패</dt><dd>0건</dd></div>
                 <div><dt>스케줄 정상률</dt><dd>91%</dd></div>
               </dl>
             </div>
@@ -164,9 +165,9 @@
                 <span>오류</span>
               </div>
               <dl class="chart-legend">
-                <div><dt><i class="legend-dot legend-dot--green"></i>정상</dt><dd>126건</dd></div>
-                <div><dt><i class="legend-dot legend-dot--amber"></i>주의</dt><dd>3건</dd></div>
-                <div><dt><i class="legend-dot legend-dot--red"></i>오류</dt><dd>2건</dd></div>
+                <div><dt>정상</dt><dd>126건</dd></div>
+                <div><dt>주의</dt><dd>3건</dd></div>
+                <div><dt>오류</dt><dd>2건</dd></div>
                 <div><dt>확인 필요</dt><dd>심각 2 · 주의 3</dd></div>
               </dl>
             </div>

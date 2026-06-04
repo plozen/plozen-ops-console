@@ -1,0 +1,52 @@
+.service-status-pill {
+  align-items: center;
+}
+
+.service-status-dot {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  flex: 0 0 6px;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+.service-status-label {
+  min-width: 0;
+}
+
+.service-table td {
+  min-width: 0;
+}
+
+.service-empty-row {
+  height: 72px;
+  text-align: center;
+}
+
+.service-row--empty td {
+  white-space: normal;
+}
+
+@media (max-width: 900px) {
+  .service-table td {
+    overflow-wrap: anywhere;
+  }
+
+  .service-row--empty {
+    display: block;
+  }
+
+  .service-row--empty .service-empty-row {
+    display: block;
+    width: 100%;
+    min-height: 72px;
+    padding: 20px 0;
+    text-align: center;
+  }
+
+  .service-row--empty .service-empty-row::before {
+    display: none;
+    content: "";
+  }
+}
