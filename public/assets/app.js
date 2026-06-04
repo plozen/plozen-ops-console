@@ -25,9 +25,9 @@ const routes = {
     description: "Docker 컨테이너와 Host/systemd 서비스를 한 목록에서 확인합니다.",
   },
   knowledge: {
-    kicker: "KnowledgeDB",
-    title: "KnowledgeDB 관리",
-    description: "KnowledgeDB 문서 적재 상태, 조각 수, 벡터 생성 여부를 확인합니다.",
+    kicker: "VectorDB",
+    title: "VectorDB 관리",
+    description: "VectorDB 문서 적재 상태, 조각 수, 벡터 생성 여부를 확인합니다.",
   },
 };
 
@@ -200,7 +200,7 @@ loadSnapshot().catch((error) => {
   document.querySelector("#metric-strip").innerHTML = `
     <div class="metric-card metric-card--critical"><dt>Data</dt><dd>오류</dd></div>
     <div class="metric-card metric-card--info"><dt>Service</dt><dd>-</dd></div>
-    <div class="metric-card metric-card--info"><dt>KnowledgeDB</dt><dd>-</dd></div>
+    <div class="metric-card metric-card--info"><dt>VectorDB</dt><dd>-</dd></div>
     <div class="metric-card metric-card--info"><dt>Automation</dt><dd>-</dd></div>
   `;
   console.error(error);

@@ -224,26 +224,30 @@ select:focus-visible {
   justify-content: flex-end;
 }
 
-.header-actions span,
-.header-actions button {
+.header-refresh-button {
   display: inline-flex;
-  min-height: 44px;
+  width: 44px;
+  height: 44px;
   align-items: center;
+  justify-content: center;
   padding: 0 12px;
-  border: 1px solid var(--line);
-  background: transparent;
-  color: var(--muted);
-  font-size: 13px;
-  font-weight: 750;
-}
-
-.header-actions button {
+  border: 1px solid var(--green-deep);
   border-color: var(--green-deep);
   background: var(--green-deep);
   color: var(--white);
 }
 
-.header-actions button:hover,
+.header-refresh-button svg {
+  width: 18px;
+  height: 18px;
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 2;
+}
+
+.header-refresh-button:hover,
 .section-action:hover,
 .filter-submit:hover,
 .button-row button:hover,

@@ -8,7 +8,7 @@ const navItems = [
   { label: "Service", href: "/services", match: "/services" },
   { label: "Automation", href: "#" },
   { label: "Logs", href: "#" },
-  { label: "KnowledgeDB", href: "/knowledge", match: "/knowledge" },
+  { label: "VectorDB", href: "/knowledge", match: "/knowledge" },
 ];
 
 function isActive(pathname, item) {

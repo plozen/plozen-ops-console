@@ -11,8 +11,7 @@ export default function PageHeader({ kicker, title, description, snapshotDate })
         <p id="page-description">{description}</p>
       </div>
       <div className="header-actions" aria-label="상태 갱신">
-        <span>{snapshotDate ? `기준 ${snapshotDate}` : "snapshot unavailable"}</span>
-        <RefreshButton />
+        <RefreshButton snapshotDate={snapshotDate} />
       </div>
     </header>
   );

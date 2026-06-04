@@ -16,8 +16,9 @@ This repository is the public clean-start operations dashboard for PLOZEN. It is
 Initial product target:
 
 - Central operations console for public-safe AI operation visibility.
-- First MVP focuses on PLOZEN Knowledge API read-only workflows.
-- Write/ingest/admin actions are a later phase after the read-only search dashboard is validated.
+- Current MVP focuses on PLOZEN Knowledge API document visibility and VectorDB operations.
+- Allowed current write workflows are document upload/stage and explicit vectorize actions through the Knowledge API.
+- Keep destructive actions, raw vault editing, credential management, and broad admin automation out of scope until separately approved.
 
 ## Design Workflow
 

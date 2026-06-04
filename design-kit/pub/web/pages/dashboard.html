@@ -31,7 +31,7 @@
           <a class="nav-link" href="./service.html?viewport=desktop">Service</a>
           <a class="nav-link" href="#">Automation</a>
           <a class="nav-link" href="#">Logs</a>
-          <a class="nav-link" href="./knowledge.html?viewport=desktop">KnowledgeDB</a>
+          <a class="nav-link" href="./knowledge.html?viewport=desktop">VectorDB</a>
         </nav>
       </aside>
 
@@ -43,8 +43,12 @@
             <p>13번 서버의 컴퓨팅 자원, 서비스, 자동화 상태를 시스템 관리자 관점에서 확인합니다.</p>
           </div>
           <div class="header-actions" aria-label="Dashboard 액션">
-            <span>동기화 2분 전</span>
-            <button type="button">새로고침</button>
+            <button class="header-refresh-button" type="button" aria-label="새로고침, 동기화 2분 전" title="새로고침, 동기화 2분 전">
+              <svg aria-hidden="true" viewBox="0 0 24 24">
+                <path d="M20 12a8 8 0 1 1-2.34-5.66"></path>
+                <path d="M20 4v6h-6"></path>
+              </svg>
+            </button>
           </div>
         </header>
 

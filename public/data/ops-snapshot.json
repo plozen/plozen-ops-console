@@ -13,7 +13,7 @@
     { "label": "HDD Data", "value": "1.6TB / 4TB", "note": "데이터 볼륨 41%", "percent": 41, "status": "ok" }
   ],
   "serviceSummary": {
-    "ok": 7,
+    "ok": 8,
     "warn": 1,
     "error": 0,
     "unknown": 1
@@ -39,6 +39,7 @@
   "services": [
     { "name": "Ops Console", "description": "운영 관리자 웹", "status": "ok", "runtime": "Host/systemd", "category": "웹 UI", "port": "3100", "process": "plozen-ops-console.service" },
     { "name": "n8n", "description": "워크플로우 자동화", "status": "ok", "runtime": "Docker", "category": "자동화", "port": "5600", "process": "plozen-automation-n8n" },
+    { "name": "Knowledge API", "description": "RAG 문서 조회·검색 API", "status": "ok", "runtime": "Docker", "category": "API", "port": "3200", "process": "plozen-knowledge-api" },
     { "name": "Knowledge Postgres", "description": "Vector DB 저장소", "status": "ok", "runtime": "Docker", "category": "DB", "port": "55000", "process": "plozen-knowledge-postgres" },
     { "name": "TimescaleDB", "description": "시계열 데이터 저장소", "status": "ok", "runtime": "Docker", "category": "DB", "port": "5432", "process": "plozen-timescaledb" },
     { "name": "Task Runner", "description": "dispatcher 자동화 브리지", "status": "warn", "runtime": "Host/systemd", "category": "자동화", "port": "3400", "process": "plozen-dispatcher.service" },
@@ -49,6 +50,7 @@
   ],
   "portPolicy": [
     { "range": "3100", "description": "Ops Console 웹 UI" },
+    { "range": "3200", "description": "PLOZEN Knowledge API" },
     { "range": "3400", "description": "dispatcher 레거시 자동화 브리지" },
     { "range": "5600", "description": "n8n 워크플로우" },
     { "range": "5900 / 5910", "description": "VNC / noVNC 원격 접속" },

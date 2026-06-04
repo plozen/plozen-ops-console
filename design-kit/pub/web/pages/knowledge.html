@@ -3,8 +3,8 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>PLOZEN KnowledgeDB 관리</title>
-    <meta name="description" content="PLOZEN Ops Console KnowledgeDB Vector DB와 문서 임베딩 관리 raw page" />
+    <title>PLOZEN VectorDB 관리</title>
+    <meta name="description" content="PLOZEN Ops Console VectorDB 문서 임베딩 관리 raw page" />
     <link rel="icon" href="data:," />
     <script>
       const params = new URLSearchParams(window.location.search);
@@ -31,24 +31,28 @@
           <a class="nav-link" href="./service.html?viewport=desktop">Service</a>
           <a class="nav-link" href="#">Automation</a>
           <a class="nav-link" href="#">Logs</a>
-          <a class="nav-link is-active" href="./knowledge.html?viewport=desktop">KnowledgeDB</a>
+          <a class="nav-link is-active" href="./knowledge.html?viewport=desktop">VectorDB</a>
         </nav>
       </aside>
 
       <section class="dashboard-main">
         <header class="dashboard-header">
           <div>
-            <p class="eyebrow">KnowledgeDB</p>
-            <h1 id="knowledge-title">KnowledgeDB 관리</h1>
+            <p class="eyebrow">VectorDB</p>
+            <h1 id="knowledge-title">VectorDB 관리</h1>
             <p>문서 적재 상태, 조각 수, 벡터 생성 여부를 한 화면에서 확인합니다.</p>
           </div>
-          <div class="header-actions" aria-label="KnowledgeDB 액션">
-            <span>기준 5월 31일</span>
-            <button type="button">새로고침</button>
+          <div class="header-actions" aria-label="VectorDB 액션">
+            <button class="header-refresh-button" type="button" aria-label="새로고침, 기준 5월 31일" title="새로고침, 기준 5월 31일">
+              <svg aria-hidden="true" viewBox="0 0 24 24">
+                <path d="M20 12a8 8 0 1 1-2.34-5.66"></path>
+                <path d="M20 4v6h-6"></path>
+              </svg>
+            </button>
           </div>
         </header>
 
-        <dl class="metric-strip metric-strip--status" aria-label="KnowledgeDB 핵심 지표">
+        <dl class="metric-strip metric-strip--status" aria-label="VectorDB 핵심 지표">
           <div class="metric-card metric-card--info">
             <dt>전체 문서</dt>
             <dd>8</dd>
@@ -220,7 +224,7 @@
           </div>
           <div class="table-pagination" aria-label="문서 목록 페이지">
             <span>1~8 / 8</span>
-            <span>페이지당 20개</span>
+            <span>페이지당 10개</span>
             <div class="pagination-controls">
               <button type="button" disabled>이전</button>
               <button type="button" disabled>다음</button>

@@ -18,7 +18,7 @@ const defaultFilters = {
 };
 
 const runtimeOrder = ["Docker", "Host/systemd"];
-const categoryOrder = ["웹 UI", "자동화", "Agent", "DB", "원격 접속"];
+const categoryOrder = ["웹 UI", "API", "자동화", "Agent", "DB", "원격 접속"];
 
 function normalize(value) {
   return String(value ?? "").trim();
