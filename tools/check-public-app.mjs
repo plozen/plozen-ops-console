@@ -5,9 +5,11 @@ const packageJson = JSON.parse(readFileSync("package.json", "utf8"));
 const layout = readFileSync("app/layout.jsx", "utf8");
 const dashboardPage = readFileSync("app/page.jsx", "utf8");
 const servicePage = readFileSync("app/services/page.jsx", "utf8");
+const knowledgePage = readFileSync("app/knowledge/page.jsx", "utf8");
 const appShell = readFileSync("components/AppShell.jsx", "utf8");
 const metricStrip = readFileSync("components/MetricStrip.jsx", "utf8");
 const dashboardView = readFileSync("components/dashboard/DashboardView.jsx", "utf8");
+const knowledgeView = readFileSync("components/knowledge/KnowledgeDatabaseView.jsx", "utf8");
 const serviceRegistry = readFileSync("components/service/ServiceRegistry.jsx", "utf8");
 const portPolicy = readFileSync("components/service/PortPolicy.jsx", "utf8");
 const snapshotSource = readFileSync("lib/snapshot.js", "utf8");
@@ -20,9 +22,11 @@ const requiredNextFiles = [
   "app/layout.jsx",
   "app/page.jsx",
   "app/services/page.jsx",
+  "app/knowledge/page.jsx",
   "components/AppShell.jsx",
   "components/MetricStrip.jsx",
   "components/dashboard/DashboardView.jsx",
+  "components/knowledge/KnowledgeDatabaseView.jsx",
   "components/service/ServiceRegistry.jsx",
   "lib/snapshot.js",
   "lib/live-snapshot.js",
@@ -36,7 +40,7 @@ const requiredAppText = [
   "metric-strip--status",
   "Dashboard",
   "Service",
-  "KnowledgeDB",
+  "VectorDB",
 ];
 
 const requiredServiceText = [
@@ -61,6 +65,13 @@ const requiredDashboardText = [
   "resource-readout-grid",
   "status-chart-grid",
   "pie-chart",
+];
+
+const requiredKnowledgeText = [
+  "KnowledgeDatabaseView",
+  "VectorDB 관리",
+  "filter-bar--knowledge",
+  "문서 업로드",
 ];
 
 const requiredServiceRegistryText = [
@@ -98,7 +109,7 @@ assert(packageJson.scripts.dev.includes("next dev"), "dev script must use next d
 assert(packageJson.scripts.build.includes("next build"), "build script must use next build");
 assert(packageJson.scripts.start.includes(".next/standalone/server.js"), "start script must use Next standalone server");
 
-const appText = [layout, dashboardPage, servicePage, appShell, metricStrip].join("\n");
+const appText = [layout, dashboardPage, servicePage, knowledgePage, appShell, metricStrip].join("\n");
 for (const needle of requiredAppText) {
   assert(appText.includes(needle), `Next app shell missing ${needle}`);
 }
@@ -116,6 +127,11 @@ for (const needle of requiredDashboardText) {
   assert(dashboardView.includes(needle), `Dashboard component missing ${needle}`);
 }
 
+for (const needle of requiredKnowledgeText) {
+  const source = needle === "VectorDB 관리" || needle === "KnowledgeDatabaseView" ? knowledgePage : knowledgeView;
+  assert(source.includes(needle), `Knowledge component missing ${needle}`);
+}
+
 for (const needle of requiredServiceRegistryText) {
   assert(serviceRegistry.includes(needle), `Service component missing ${needle}`);
 }
@@ -124,7 +140,7 @@ for (const needle of requiredServicesCss) {
   assert(servicesCss.includes(needle), `public/assets/services.css missing ${needle}`);
 }
 
-assert(Array.isArray(snapshot.services) && snapshot.services.length === 9, "snapshot services length must be 9");
+assert(Array.isArray(snapshot.services) && snapshot.services.length === 10, "snapshot services length must be 10");
 assert(Array.isArray(snapshot.documents) && snapshot.documents.length === 8, "snapshot documents length must be 8");
 assert(Array.isArray(snapshot.uploadFiles) && snapshot.uploadFiles.length === 4, "snapshot uploadFiles length must be 4");
 assert(snapshot.services.every((service) => service.name && service.status && service.runtime), "invalid service row");
@@ -157,6 +173,8 @@ const joined = [
   appShell,
   metricStrip,
   dashboardView,
+  knowledgePage,
+  knowledgeView,
   serviceRegistry,
   portPolicy,
   snapshotSource,
