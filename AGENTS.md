@@ -1,36 +1,36 @@
-# PLOZEN Ops Console Agent Rules
+# PLOZEN Ops Console 에이전트 규칙
 
-## Identity
+## 정체성
 
-This repository is the public clean-start operations dashboard for PLOZEN. It is not the legacy `plozen-console` repository.
+이 저장소는 PLOZEN의 공개용 clean-start 운영 대시보드다. 기존 레거시 `plozen-console` 저장소가 아니다.
 
-## Public Boundary
+## 공개 범위
 
-- Keep the repository public-safe by default.
-- Do not copy code, logs, credentials, or private assumptions from the legacy console.
-- Do not commit `.env`, `.env.local`, `.env.*.local`, private tokens, n8n credentials, Discord bot tokens, or raw Obsidian vault content.
-- Use `.env.example` only for variable names and safe placeholders.
+- 이 저장소는 기본적으로 public-safe 상태를 유지한다.
+- 레거시 콘솔의 코드, 로그, credential, private 운영 가정을 복사하지 않는다.
+- `.env`, `.env.local`, `.env.*.local`, private token, n8n credential, Discord bot token, Obsidian vault 원문은 commit하지 않는다.
+- `.env.example`에는 변수명과 안전한 placeholder만 둔다.
 
-## Product Direction
+## 제품 방향
 
-Initial product target:
+초기 제품 목표:
 
-- Central operations console for public-safe AI operation visibility.
-- Current MVP focuses on PLOZEN Knowledge API document visibility and VectorDB operations.
-- Allowed current write workflows are document upload/stage and explicit vectorize actions through the Knowledge API.
-- Keep destructive actions, raw vault editing, credential management, and broad admin automation out of scope until separately approved.
+- public-safe한 AI 운영 상태를 보여주는 중앙 운영 콘솔.
+- 현재 MVP는 PLOZEN Knowledge API의 문서 가시성과 VectorDB 운영에 집중한다.
+- 현재 허용되는 쓰기 workflow는 Knowledge API를 통한 문서 업로드/스테이징과 명시적 벡터 생성 액션이다.
+- destructive action, raw vault editing, credential management, broad admin automation은 별도 승인 전까지 범위 밖으로 둔다.
 
-## Design Workflow
+## 디자인 Workflow
 
-- Use `design-kit/` for design planning and visual proof.
-- Treat `design-kit/DESIGN.md` as the design kit source for visual generation until a root product `DESIGN.md` is created.
-- Keep `design-kit/pub/` as raw publishing/artboard source.
-- Do not place device mockups, thumbnails, or composite exports inside raw `pub/` pages.
+- 디자인 기획과 시각 증적은 `design-kit/`을 사용한다.
+- root 제품 `DESIGN.md`가 생기기 전까지 `design-kit/DESIGN.md`를 시각 생성 기준 source로 본다.
+- `design-kit/pub/`은 raw publishing/artboard source로 유지한다.
+- device mockup, thumbnail, composite export는 raw `pub/` page 안에 넣지 않는다.
 
-## Verification
+## 검증
 
-Before commit or push:
+commit 또는 push 전:
 
 - `npm run design-kit:doctor`
 - `git diff --check`
-- secret scan if `gitleaks` or another scanner is available locally
+- 로컬에 `gitleaks` 또는 다른 scanner가 있으면 secret scan
